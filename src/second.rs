@@ -35,6 +35,16 @@ impl<T> List<T> {
             node.val
         })
     }
+
+    // Returns head of list without popping
+    pub fn peek(&self) -> Option<&T> {
+        self.head.as_ref().map(|n| &n.val)
+    }
+
+    // returns mutable version of head
+    pub fn peek_mut(&mut self) -> Option<&mut T> {
+        self.head.as_mut().map(|n| &mut n.val)
+    }
 }
 
 #[cfg(test)]
@@ -67,5 +77,12 @@ mod test {
         list2.push("str2");
 
         assert_eq!(list2.pop(), Some("str2"));
+
+        let peek_result = list2.peek();
+        println!("peek=>{:?}", peek_result);
+        assert_eq!(peek_result, Some(&"str1"));
+
+        let mut mut_peek = list2.peek_mut();
+        assert_eq!(mut_peek, Some(&mut "str1"));
     }
 }
