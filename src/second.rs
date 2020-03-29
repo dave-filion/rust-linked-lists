@@ -82,7 +82,12 @@ mod test {
         println!("peek=>{:?}", peek_result);
         assert_eq!(peek_result, Some(&"str1"));
 
-        let mut mut_peek = list2.peek_mut();
-        assert_eq!(mut_peek, Some(&mut "str1"));
+        assert_eq!(list2.peek_mut(), Some(&mut "str1"));
+
+        // test mutablility
+        list2.peek_mut().map(|val| *val = "someotherstring");
+
+        // see if it changed
+        assert_eq!(list2.peek(), Some(&"someotherstring"));
     }
 }
